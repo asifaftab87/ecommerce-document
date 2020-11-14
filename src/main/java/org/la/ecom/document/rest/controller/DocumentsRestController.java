@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.la.ecom.document.client.service.ApiServiceDocument;
 import org.la.ecom.document.model.Documents;
 import org.la.ecom.document.repository.DocumentsRepository;
-import org.la.ecom.document.service.ApiService;
 import org.la.ecom.notification.api.dto.MailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,17 +26,19 @@ public class DocumentsRestController {
 	private DocumentsRepository documentsRepository;
 	
 	@Autowired
-	private ApiService apiService;
+	private ApiServiceDocument apiService;
 	
 	@GetMapping(value = "/download/id/{id}")
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//@PreAuthorize("hasRole('ROLE_USER')")
 	public Optional<Documents> download(HttpServletRequest request, @PathVariable("id") String id) {
 		
-		MailDTO mail = new MailDTO("springboot87@gmail.com", "asharabi101@gmail.com", "service to service", null, "testing from mongo service"); 
+		MailDTO mail = new MailDTO("springboot87@gmail.com", "asifaftab87@gmail.com", "service to service", null, "testing from mongo service"); 
 		String arr = null;
 		try {
-			//arr = apiService.notificationClient().getForObject("/hello", String.class);
-			Boolean b = apiService.notificationClient().postForObject("/registrationDetails", mail, Boolean.class);
-			System.out.println("b: "+b);
+			arr = apiService.mysqlClient().getForObject("/hello", String.class);
+			//Boolean b = apiService.notificationClient().postForObject("/registrationDetails", mail, Boolean.class);
+			System.out.println("arr: "+arr);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

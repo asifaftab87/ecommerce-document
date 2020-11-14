@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.la.ecom.document.rest.template.interceptor.RestTemplateInterceptor;
+import org.la.ecom.mysql.api.client.MysqlClient;
 import org.la.ecom.notification.api.client.NotificationClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class AppConfiguration {
+public class AppDocumentConfiguration {
 
 	@Autowired
 	private RestTemplateInterceptor restTemplateInterceptor;
@@ -37,6 +38,11 @@ public class AppConfiguration {
 	@Bean
 	public NotificationClient notificationClient() {
 		return new NotificationClient();
+	}
+	
+	@Bean
+	public MysqlClient mysqlClient() {
+		return new MysqlClient();
 	}
 
 

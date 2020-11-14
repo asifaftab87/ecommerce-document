@@ -16,12 +16,23 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<start-class>org.la.ecom.document.EcommerceDocumentApplication</start-class>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.la.ecom.notification.api</groupId>
 			<artifactId>ecommerce-notification-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.mysql.api</groupId>
+			<artifactId>ecommerce-mysql-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.document.api</groupId>
+			<artifactId>ecommerce-document-api</artifactId>
 			<version>0.1</version>
 		</dependency>
 		<dependency>

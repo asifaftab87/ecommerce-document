@@ -34,8 +34,6 @@ public class JwtRequestFilter  extends OncePerRequestFilter{
 	
 		final String authorizationHeader = request.getHeader("Authorization");
 		
-		restTemplateInterceptor.setAuthorizationHeader(authorizationHeader);
-		
 		String username = null;
 		String jwt = null;
 		
@@ -47,6 +45,7 @@ public class JwtRequestFilter  extends OncePerRequestFilter{
 			
 			jwt = authorizationHeader.substring(7);
 			username = jwtUtil.extractUsername(jwt);
+			restTemplateInterceptor.setAuthorizationHeader(authorizationHeader);
 		}
 		
 		if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
