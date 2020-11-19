@@ -45,5 +45,4 @@ public class AppDocumentConfiguration {
 		return new MysqlClient();
 	}
 
-
 }
