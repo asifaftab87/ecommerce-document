@@ -3,6 +3,7 @@ package org.la.ecom.document.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
 import org.la.ecom.document.rest.template.interceptor.RestTemplateInterceptor;
 import org.la.ecom.mysql.api.client.MysqlClient;
 import org.la.ecom.notification.api.client.NotificationClient;
@@ -45,4 +46,9 @@ public class AppDocumentConfiguration {
 		return new MysqlClient();
 	}
 
+	@Bean
+	public DozerBeanMapper dozerBeanMapper() {
+		return new DozerBeanMapper();
+	}
+	
 }

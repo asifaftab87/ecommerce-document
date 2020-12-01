@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.dozer.DozerBeanMapper;
+import org.la.ecom.document.api.dto.DocumentsDTO;
 import org.la.ecom.document.client.service.ApiServiceDocument;
 import org.la.ecom.document.model.Documents;
 import org.la.ecom.document.repository.DocumentsRepository;
@@ -28,6 +30,9 @@ public class DocumentsRestController {
 	@Autowired
 	private ApiServiceDocument apiService;
 	
+	@Autowired
+	private DozerBeanMapper mapper;
+	
 	@GetMapping(value = "/download/id/{id}")
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	//@PreAuthorize("hasRole('ROLE_USER')")
@@ -46,9 +51,24 @@ public class DocumentsRestController {
 		return documentsRepository.findById(id);
 	}
 	
+	@GetMapping(value = "/downloads/id/{id}")
+	public DocumentsDTO download(@PathVariable("id") String id) {
+
+		Optional<Documents> optionalDoc = documentsRepository.findById(id);
+		if(optionalDoc.isPresent()) {
+			DocumentsDTO documentsDto = mapper.map(optionalDoc.get(), DocumentsDTO.class);
+			return documentsDto;
+		}
+		return null;
+	}
+	
 	@PostMapping(value = "/upload")
-    public Documents addNewApplication(@RequestBody Documents documents){
-        return documentsRepository.save(documents);
+    public DocumentsDTO addNewApplication(@RequestBody DocumentsDTO documentsDto){
+		
+		Documents documents = mapper.map(documentsDto, Documents.class);
+		documents = documentsRepository.save(documents);
+		
+        return mapper.map(documents, DocumentsDTO.class);
     }
 	
 	@GetMapping(value = "/findAll")

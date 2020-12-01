@@ -15,12 +15,12 @@ public class Documents implements Serializable{
 	private String id;
 	private String name;
 	private String type;
-	private String size;
+	private long size;
 	private byte[] contents;
 	
 	public Documents() {}
 
-	public Documents(String id, String name, String type, String size, byte[] contents) {
+	public Documents(String id, String name, String type, long size, byte[] contents) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -53,11 +53,11 @@ public class Documents implements Serializable{
 		this.type = type;
 	}
 
-	public String getSize() {
+	public long getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(long size) {
 		this.size = size;
 	}
 
